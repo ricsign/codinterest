@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// index page route
+Route::group(['prefix'=>'public'],function () {
+    Route::get('index',function(){
+        return view('index');
+    });
 });
