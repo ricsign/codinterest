@@ -1,0 +1,25 @@
+/*css for sign up and sign in page*/
+body{
+    background-image: url("../imgs/site/signupbg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.sign-container{
+    width: 50%;
+    margin: 10% auto 10% auto;
+    padding: 5% 1% 5% 1%;
+    background-color:rgba(248,245,255,0.72);
+    border-radius: 25px;
+}
+.sign-container a{
+    text-decoration: none;
+}
+.sign-header{
+    text-align: center;
+    margin-bottom: 2%;
+}
+.vercode{
+    width: 20%;
+}
+
+

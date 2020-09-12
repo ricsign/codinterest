@@ -1,3 +1,4 @@
+{{--Common Header File--}}
 <link rel="stylesheet" href="{{\Illuminate\Support\Facades\URL::asset('styles/header.css')}}">
 <nav class="navbar navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="{{url('/public/index')}}">Codinterest</a>
@@ -8,10 +9,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{url('/public/index')}}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Problems</a>
+                <a class="nav-link" href="{{url('/protected/allproblems')}}">Problems</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Ranking</a>
@@ -26,7 +27,7 @@
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Sign Up</a>
+                <a class="nav-link" href="{{url('/public/signup')}}">Sign Up</a>
             </li>
         </ul>
     </div>
