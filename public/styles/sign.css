@@ -5,9 +5,10 @@ body{
     background-repeat: no-repeat;
 }
 .sign-container{
-    width: 50%;
+    width: 40%;
+    min-width: 450px;
     margin: 10% auto 10% auto;
-    padding: 5% 1% 5% 1%;
+    padding: 4% 1% 3% 1%;
     background-color:rgba(248,245,255,0.72);
     border-radius: 25px;
 }
@@ -20,6 +21,14 @@ body{
 }
 .vercode{
     width: 20%;
+}
+.codeimg{
+    float: right;
+    width: 200px;
+    height: 40px;
+    transform: translateY(-98%);
+    border-radius: 3px;
+    /*border: inset 1px;*/
 }
 
 

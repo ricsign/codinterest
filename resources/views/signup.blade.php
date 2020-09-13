@@ -13,33 +13,34 @@
 </head>
 <body>
     <div class="sign-container">
-        <form>
+        <form id="signupForm">
             {{csrf_field()}}
             <h2 class="sign-header">Sign Up</h2>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Username_123">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username_123" required minlength="3" maxlength="20">
                 <small class="form-text text-muted">Username may only use the combination English alphabets, numbers and underscore '_' with length 3~20</small>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control" id="password" name="password" required minlength="6">
                 <small class="form-text text-muted">A strong password must have at least 6 characters</small>
             </div>
             <div class="form-group">
                 <label for="repassword">Confirm Password</label>
-                <input type="password" class="form-control" id="repassword">
+                <input type="password" class="form-control" id="repassword" name="repassword" required minlength="6">
                 <small class="form-text text-muted">Confirm Your Password</small>
             </div>
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="example@123.com">
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="example@123.com" required minlength="4">
                 <small class="form-text text-muted">A valid email that is able to receive activation link</small>
             </div>
             <div class="form-group">
                 <label for="vercode">Verification Code</label>
-                <input type="text" class="form-control vercode" id="vercode">
-                {{-- <img src="">--}}
+                <input type="text" class="form-control vercode" id="vercode" name="vercode" required>
+                {{--passing rand is because we want to confuse js that everytime we request a different url, preventing cache--}}
+                <img src="{{url('/public/captcha/vercode')}}" class="codeimg" onclick="this.src='{{url('/public/captcha/vercode')}}'+'?rand='+Math.random()">
                 <small class="form-text text-muted">To verify you as a human</small>
             </div>
             <br>
@@ -52,4 +53,37 @@
     </div>
 </body>
 @include('scripts')
+<script>
+    // jQuery form validation
+    $().ready(function() {
+        $("#signupForm").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20,
+                    regex: "^\\w{3,20}$"
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                repassword: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: "#password"
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                vercode: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 6
+                }
+            }
+        })
+    });
+</script>
 </html>

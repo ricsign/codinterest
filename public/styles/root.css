@@ -3,3 +3,11 @@
     text-align: center;
     margin: auto;
 }
+input.error {
+    border: 1px solid red;
+}
+label.error {
+    background: url("../imgs/site/incorrect.png") no-repeat 0px 5px;
+    text-indent: 25px;
+    color: red;
+}

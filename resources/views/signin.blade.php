@@ -13,21 +13,23 @@
 </head>
 <body>
     <div class="sign-container">
-        <form>
+        <form id="signinForm">
             {{csrf_field()}}
             <h2 class="sign-header">Sign In</h2>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username">
+                <input type="text" class="form-control" id="username" name="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="form-group">
                 <label for="vercode">Verification Code</label>
-                <input type="text" class="form-control vercode" id="vercode">
-                {{-- <img src="">--}}
+                <input type="text" class="form-control vercode" id="vercode" name="vercode" required>
+                {{--passing rand is because we want to confuse js that everytime we request a different url, preventing cache--}}
+                <img class="codeimg" onclick="this.src='{{url('/public/captcha/vercode')}}'+'?rand='+Math.random()"
+                     src="{{url('/public/captcha/vercode')}}" alt="Verification Code">
                 <small class="form-text text-muted">To verify you as a human</small>
             </div>
             <br>
@@ -40,4 +42,31 @@
     </div>
 </body>
 @include('scripts')
+<script>
+    $().ready(function() {
+        $("#signinForm").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 20,
+                    regex: "^\\w{3,20}$"
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                vercode: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 6
+                }
+            }, messages: {
+                username: "Invalid username",
+                password: "Invalid password",
+                vercode: "Invalid verification code"
+            }
+        })
+    });
+</script>
 </html>

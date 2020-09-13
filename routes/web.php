@@ -13,19 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/',function (){
+    return redirect(url('/public/index'));
+});
+
+
 // public page route
 // pages that doesn't need a signed account to view
 Route::group(['prefix'=>'public'],function () {
     Route::get('index',function(){
         return view('index');
     });
-    Route::get('signup',function (){
-        return view('signup');
-    });
-    Route::get('signin',function (){
-        return view('signin');
-    });
+    Route::get('signup','App\Http\Controllers\SignController@signup');
+    Route::get('signin','App\Http\Controllers\SignController@signin');
+    // vercode route
+    Route::get('captcha/vercode','App\Http\Controllers\SignController@vercode');
 });
+
 
 // protected page route
 // pages that must need a signed account to view
