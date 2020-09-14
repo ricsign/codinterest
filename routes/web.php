@@ -26,6 +26,8 @@ Route::group(['prefix'=>'public'],function () {
     });
     Route::get('signup','App\Http\Controllers\SignController@signup');
     Route::get('signin','App\Http\Controllers\SignController@signin');
+    // processing request of signup and sign in
+    Route::post('dosignup','App\Http\Controllers\SignController@dosignup');
     // vercode route
     Route::get('captcha/vercode','App\Http\Controllers\SignController@vercode');
 });

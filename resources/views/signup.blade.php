@@ -13,7 +13,17 @@
 </head>
 <body>
     <div class="sign-container">
-        <form id="signupForm">
+        {{--check if we have errors or not--}}
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form id="signupForm" action="{{url('/public/dosignup')}}" method="post">
             {{csrf_field()}}
             <h2 class="sign-header">Sign Up</h2>
             <div class="form-group">
@@ -70,7 +80,7 @@
                 },
                 repassword: {
                     required: true,
-                    minlength: 5,
+                    minlength: 6,
                     equalTo: "#password"
                 },
                 email: {

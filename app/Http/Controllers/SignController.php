@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserSign;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 
 // use captcha vercode namespace
@@ -37,6 +39,26 @@ class SignController extends Controller
         header('Cache-Control:no-cache,must-revalidate');
         header('Content-Type:image/jpeg');
         $builder->output();
+    }
+
+    public function dosignup(Request $request){
+        // 1. validate user's input
+        $session_vercode = strtoupper(\request()->session()->get('vercode')); // session vercode uppercased
+        $request->merge(['vercode'=>strtoupper($request->input('vercode'))]); // make vercode user input uppercased
+
+        $this->validate($request,[
+            'username'=>'required|min:3|max:20|regex:/^[\w]*$/',
+            'password'=>'required|min:6',
+            'repassword'=>'required|same:password',
+            'email'=>'required|email',
+            'vercode'=>'required|min:6|max:6|alpha_num|in:'.$session_vercode,
+        ]);
+        // 2. write into the database
+//        $a = UserSign::all();
+//        echo $a;
+        // 3. send activation link
+        // 4. redirect to signin page
+        return $request->toArray();
     }
 }
 
