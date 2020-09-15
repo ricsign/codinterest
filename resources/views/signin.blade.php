@@ -13,6 +13,9 @@
 </head>
 <body>
     <div class="sign-container">
+        @unless(empty(session()->get('msg')))
+            <div class="alert alert-success">{{session()->get('msg')}}</div>
+        @endunless
         <form id="signinForm">
             {{csrf_field()}}
             <h2 class="sign-header">Sign In</h2>

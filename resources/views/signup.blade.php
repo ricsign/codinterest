@@ -13,7 +13,6 @@
 </head>
 <body>
     <div class="sign-container">
-        {{--check if we have errors or not--}}
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
@@ -28,22 +27,22 @@
             <h2 class="sign-header">Sign Up</h2>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Username_123" required minlength="3" maxlength="20">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username_123" value="{{old('username')}}" required minlength="3" maxlength="20">
                 <small class="form-text text-muted">Username may only use the combination English alphabets, numbers and underscore '_' with length 3~20</small>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required minlength="6">
+                <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}" required minlength="6">
                 <small class="form-text text-muted">A strong password must have at least 6 characters</small>
             </div>
             <div class="form-group">
                 <label for="repassword">Confirm Password</label>
-                <input type="password" class="form-control" id="repassword" name="repassword" required minlength="6">
+                <input type="password" class="form-control" id="repassword" name="repassword" value="{{old('repassword')}}" required minlength="6">
                 <small class="form-text text-muted">Confirm Your Password</small>
             </div>
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="example@123.com" required minlength="4">
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="example@123.com" value="{{old('email')}}" required minlength="4">
                 <small class="form-text text-muted">A valid email that is able to receive activation link</small>
             </div>
             <div class="form-group">
@@ -72,7 +71,7 @@
                     required: true,
                     minlength: 3,
                     maxlength: 20,
-                    regex: "^\\w{3,20}$"
+                    regex: "^\\w{3,20}$",
                 },
                 password: {
                     required: true,

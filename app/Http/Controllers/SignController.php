@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\UserSign;
 use Dotenv\Validator;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 // use captcha vercode namespace
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
 
 class SignController extends Controller
 {
@@ -41,24 +46,57 @@ class SignController extends Controller
         $builder->output();
     }
 
+    public function emailactivation(Request $request){
+        // find user
+        $user = UserSign::findOrFail($request->uid);
+        if($request->usertoken != $user->usertoken) return 'Invalid Activation! Please try again!';
+
+        $res = $user->update([
+            'is_activated'=>1,
+            'usertoken'=>md5('token'.$user->email.$user->username.time().'token2')
+        ]);
+
+        if($res) return redirect('/public/signin')->with('msg','Congratulations! Account is activated, please sign back in!');
+        else return redirect('/public/signup')->withErrors("Sorry, we're currently unable to activate your account, please try again!");
+    }
+
     public function dosignup(Request $request){
         // 1. validate user's input
         $session_vercode = strtoupper(\request()->session()->get('vercode')); // session vercode uppercased
         $request->merge(['vercode'=>strtoupper($request->input('vercode'))]); // make vercode user input uppercased
 
-        $this->validate($request,[
-            'username'=>'required|min:3|max:20|regex:/^[\w]*$/',
-            'password'=>'required|min:6',
-            'repassword'=>'required|same:password',
-            'email'=>'required|email',
-            'vercode'=>'required|min:6|max:6|alpha_num|in:'.$session_vercode,
+//        try {
+        $this->validate($request, [
+            'username' => 'required|min:3|max:20|regex:/^[\w]*$/|unique:user_sign,username',
+            'password' => 'required|min:6',
+            'repassword' => 'required|same:password',
+            'email' => 'required|email',
+            'vercode' => 'required|min:6|max:6|alpha_num|in:' . $session_vercode,
         ]);
+//        } catch (ValidationException $e) {
+//            return redirect('/public/signup')->withErrors('Unknown errors had occured');
+//        }
+
         // 2. write into the database
-//        $a = UserSign::all();
-//        echo $a;
+        $usertoken = md5('token'.$request->input('email').$request->input('username').time().'token2');
+        $res = $user = UserSign::create([
+            'username'=>$request->input('username'),
+            'password'=>Hash::make($request->input('password')),
+            'email'=>$request->input('email'),
+            'usertoken'=>$usertoken,
+            'is_activated'=>0
+        ]);
+        if(!$res) return redirect('/public/signup')->withErrors('Unknown errors had occured');
+
         // 3. send activation link
+        Mail::send('nonsite.emailactivation',['res'=>$res],function($m) use ($res){
+            $m->from('codinterest@noreply.com','Account Validation');
+            $m->to($res->email,$res->username)->subject('Codinterest Account Activation');
+        });
         // 4. redirect to signin page
-        return $request->toArray();
+//        echo $res->uid;
+//        echo "<script>alert('You have successfully signed up, please check your email to activate your account, then sign back in again.');</script>";
+        return redirect('/public/signin')->with('msg','You have successfully signed up, please check your email to activate your account, then sign back in again. (The activation email might be in spams)');
     }
 }
 

@@ -26,10 +26,16 @@ Route::group(['prefix'=>'public'],function () {
     });
     Route::get('signup','App\Http\Controllers\SignController@signup');
     Route::get('signin','App\Http\Controllers\SignController@signin');
+
     // processing request of signup and sign in
     Route::post('dosignup','App\Http\Controllers\SignController@dosignup');
+
+    // email activation
+    Route::get('emailactivation','App\Http\Controllers\SignController@emailactivation');
+    Route::get('lol',function (){return view('nonsite.emailactivation');});
     // vercode route
     Route::get('captcha/vercode','App\Http\Controllers\SignController@vercode');
+
 });
 
 

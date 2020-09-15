@@ -12,4 +12,8 @@ class UserSign extends Model
     use HasFactory;
     protected $table = 'user_sign';
     protected $primaryKey = 'uid';
+    protected $keyType = 'int';
+    public $incrementing = true;
+
+    protected $fillable = ['username','password','email','usertoken','is_activated','created_time'];
 }
