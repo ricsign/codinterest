@@ -70,7 +70,7 @@ class SignController extends Controller
             'username' => 'required|min:3|max:20|regex:/^[\w]*$/|unique:user_sign,username',
             'password' => 'required|min:6',
             'repassword' => 'required|same:password',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:user_sign,email',
             'vercode' => 'required|min:6|max:6|alpha_num|in:' . $session_vercode,
         ]);
 //        } catch (ValidationException $e) {
@@ -79,24 +79,57 @@ class SignController extends Controller
 
         // 2. write into the database
         $usertoken = md5('token'.$request->input('email').$request->input('username').time().'token2');
-        $res = $user = UserSign::create([
+        $user = UserSign::create([
             'username'=>$request->input('username'),
             'password'=>Hash::make($request->input('password')),
             'email'=>$request->input('email'),
             'usertoken'=>$usertoken,
             'is_activated'=>0
         ]);
-        if(!$res) return redirect('/public/signup')->withErrors('Unknown errors had occured');
+        if(!$user) return redirect('/public/signup')->withErrors('Unknown errors had occured');
 
         // 3. send activation link
-        Mail::send('nonsite.emailactivation',['res'=>$res],function($m) use ($res){
+        Mail::send('nonsite.emailactivation',['user'=>$user],function($m) use ($user){
             $m->from('codinterest@noreply.com','Account Validation');
-            $m->to($res->email,$res->username)->subject('Codinterest Account Activation');
+            $m->to($user->email,$user->username)->subject('Codinterest Account Activation');
         });
         // 4. redirect to signin page
-//        echo $res->uid;
+//        echo $user->uid;
 //        echo "<script>alert('You have successfully signed up, please check your email to activate your account, then sign back in again.');</script>";
         return redirect('/public/signin')->with('msg','You have successfully signed up, please check your email to activate your account, then sign back in again. (The activation email might be in spams)');
+    }
+
+    public function dosignin(Request $request){
+        // 1. validate user's input
+        $session_vercode = strtoupper(\request()->session()->get('vercode')); // session vercode uppercased
+        $request->merge(['vercode'=>strtoupper($request->input('vercode'))]); // make vercode user input uppercased
+
+//        try {
+        $this->validate($request, [
+            'username' => 'required|min:3|max:20|regex:/^[\w]*$/',
+            'password' => 'required|min:6',
+            'vercode' => 'required|min:6|max:6|alpha_num|in:' . $session_vercode,
+        ]);
+//        } catch (ValidationException $e) {
+//            return redirect('/public/signup')->withErrors('Unknown errors had occured');
+//        }
+
+        // 2. Check the database
+        $usertoken = md5('token'.$request->input('email').$request->input('username').time().'token2');
+        $user = UserSign::where('username',$request->input('username'))->first();
+
+        if(!$user) return redirect('/public/signin')->withErrors('Username or password is incorrect!'); //can't find user
+
+        if(!Hash::check($request->input('password'),$user->password)) return redirect('/public/signin')->withErrors('Username or password is incorrect!'); //password doesn't match
+
+        if($user->is_activated == 0) return redirect('/public/signin')->withErrors('Please activate your account first! We sent an email with your activation link, please check spams.'); //unactivated
+
+
+        // 3. Store user info in session
+        session()->put('user',$user);
+
+        // 4. Redirect to index
+        return redirect('/public/index')->with('success_signin','Welcome back, '.$user->username.'!');
     }
 }
 

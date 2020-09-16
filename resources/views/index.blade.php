@@ -3,6 +3,9 @@
 @section('main')
     <link rel="stylesheet" href="{{\Illuminate\Support\Facades\URL::asset('styles/index-main.css')}}">
 
+    @unless(empty(session()->get('success_signin')))
+        <div class="alert alert-success alert-dismissible fade show">{{session()->get('success_signin')}}</div>
+    @endunless
     {{--jumbotron--}}
     <div class="jumbotron jumbotron-fluid">
         <div class="container">

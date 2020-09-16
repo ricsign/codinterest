@@ -1,7 +1,13 @@
+body{
+    background-color: #fae3d9;
+}
 .main {
-    width: 90%;
+    width: 85%;
     text-align: center;
+    padding: 5%;
     margin: auto;
+    background-color: white;
+    border-radius: 3%;
 }
 input.error {
     border: 1px solid red;

@@ -1,0 +1,9 @@
+h1{
+    margin-bottom: 3%;
+}
+.card-deck-1,.card-deck-2{
+    margin-bottom: 3% !important;
+}
+.card{
+    min-width: 300px;
+}

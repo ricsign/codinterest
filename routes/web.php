@@ -29,12 +29,19 @@ Route::group(['prefix'=>'public'],function () {
 
     // processing request of signup and sign in
     Route::post('dosignup','App\Http\Controllers\SignController@dosignup');
+    Route::post('dosignin','App\Http\Controllers\SignController@dosignin');
 
     // email activation
     Route::get('emailactivation','App\Http\Controllers\SignController@emailactivation');
-    Route::get('lol',function (){return view('nonsite.emailactivation');});
+//    Route::get('lol',function (){return view('nonsite.emailactivation');}); //testing
+
     // vercode route
     Route::get('captcha/vercode','App\Http\Controllers\SignController@vercode');
+
+    // route of all problems page
+    Route::get('allproblems',function (){
+        return view('allproblems');
+    });
 
 });
 
@@ -43,8 +50,5 @@ Route::group(['prefix'=>'public'],function () {
 // pages that must need a signed account to view
 // Middleware will be implemented
 Route::group(['prefix'=>'protected'],function (){
-    // route of all problems page
-    Route::get('allproblems',function (){
-        return view('allproblems');
-    });
+
 });

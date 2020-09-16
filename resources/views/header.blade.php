@@ -12,7 +12,7 @@
                 <a class="nav-link" href="{{url('/public/index')}}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{url('/protected/allproblems')}}">Problems</a>
+                <a class="nav-link" href="{{url('/public/allproblems')}}">Problems</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Ranking</a>
@@ -27,7 +27,11 @@
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{url('/public/signup')}}">Sign Up</a>
+                @if(empty(session()->get('user')))
+                    <a class="nav-link" href="{{url('/public/signup')}}">Sign Up</a>
+                @else
+                    <a class="nav-link" href="#">My Account</a>
+                @endif
             </li>
         </ul>
     </div>

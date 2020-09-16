@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="{{\Illuminate\Support\Facades\URL::asset('styles/signup.css')}}">
 </head>
 <body>
+    {{--One user can only have one account --}}
+    @unless(empty(session()->get('user')))
+        <script>window.location='/public/index'</script>
+    @endunless
+
     <div class="sign-container">
         @if (count($errors) > 0)
             <div class="alert alert-danger">

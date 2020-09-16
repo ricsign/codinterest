@@ -18,16 +18,14 @@
             border-top: 5px dotted blue;
             margin: 40px 0 40px 0;
         }
-        a{
-            color:white;
-            text-decoration: none;
-            font-size: 30px;
-        }
         button{
             padding: 50px;
             background: dodgerblue;
             border-radius: 10px;
             margin-bottom: 50px;
+            color:white;
+            text-decoration: none;
+            font-size: 30px;
         }
         #main-container{
             padding: 30px;
@@ -41,14 +39,14 @@
 <body>
     <div id="main-container">
         <p>
-            Dear <span id="username">{{$res->username??''}}</span>, you have successfully signed up as a member,
+            Dear <span id="username">{{$user->username??''}}</span>, you have successfully signed up as a member,
             Please click the button below to complete your activation process before signing in.
             We appreciate your support!
         </p>
         <hr>
-        <button type="button" id="activation-button">
-            <a href="http://127.0.0.1:8000/public/emailactivation?uid={{$res->uid??''}}&activate=instant_activation&usertoken={{$res->usertoken??''}}&validate=true">Activate</a> {{--Change href after setting up the website--}}
-        </button>
+        <a href="http://127.0.0.1:8000/public/emailactivation?uid={{$user->uid??''}}&activate=instant_activation&usertoken={{$user->usertoken??''}}&validate=true">
+            <button type="button" id="activation-button">Activate</button>
+        </a> {{--Change href after setting up the website--}}
     </div>
 </body>
 </html>

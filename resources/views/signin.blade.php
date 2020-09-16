@@ -12,20 +12,34 @@
     <link rel="stylesheet" href="{{\Illuminate\Support\Facades\URL::asset('styles/signin.css')}}">
 </head>
 <body>
+    {{--One user can only have one account --}}
+    @unless(empty(session()->get('user')))
+        <script>window.location='/public/index'</script>
+    @endunless
+
     <div class="sign-container">
         @unless(empty(session()->get('msg')))
             <div class="alert alert-success">{{session()->get('msg')}}</div>
         @endunless
-        <form id="signinForm">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form id="signinForm" action="{{url('/public/dosignin')}}" method="post">
             {{csrf_field()}}
             <h2 class="sign-header">Sign In</h2>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" class="form-control" id="username" name="username" value="{{old('username')}}" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}" required>
             </div>
             <div class="form-group">
                 <label for="vercode">Verification Code</label>
