@@ -1,5 +1,5 @@
 body{
-    background-color: #fae3d9;
+    background-color: #f6f6f6;
 }
 .main {
     width: 85%;
@@ -13,7 +13,7 @@ input.error {
     border: 1px solid red;
 }
 label.error {
-    background: url("../imgs/site/incorrect.png") no-repeat 0px 5px;
+    background: url("../imgs/site/incorrect.png") no-repeat 0 5px;
     text-indent: 25px;
     color: red;
 }

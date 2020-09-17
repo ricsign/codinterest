@@ -43,8 +43,15 @@ Route::group(['prefix'=>'public'],function () {
         return view('allproblems');
     });
 
-});
+    // route of problems grouped by its pterrid
+    Route::get('getproblems/{pterrid}','App\Http\Controllers\ProblemsController@getproblems')
+    ->where('pterrid','[123456]');
 
+    // route of a single problem
+    Route::get('getsingleproblem/{pid}','App\Http\Controllers\ProblemsController@getsingleproblem')
+        ->where('pid','[0-9]+');
+
+});
 
 // protected page route
 // pages that must need a signed account to view
