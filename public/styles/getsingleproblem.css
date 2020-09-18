@@ -1,6 +1,4 @@
-.sub-tip{
-    float:right;
-}
+
 #description-container{
     text-align: left;
 }
@@ -12,4 +10,24 @@
 #description-container p{
     margin-bottom: 3%;
 }
+
+.answer{
+    min-height: 80px;
+    max-height: 3000px;
+}
+.input-group{
+    margin-top: 10%;
+}
+.input-tip{
+    margin-top: 1%;
+    color: red;
+    font-size: 15px;
+}
+.submit{
+    margin-top: 2%;
+}
+.sub-tip{
+    margin-left: 20px;
+}
+
 

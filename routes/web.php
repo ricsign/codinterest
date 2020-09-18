@@ -31,6 +31,7 @@ Route::group(['prefix'=>'public'],function () {
     Route::post('dosignup','App\Http\Controllers\SignController@dosignup');
     Route::post('dosignin','App\Http\Controllers\SignController@dosignin');
 
+
     // email activation
     Route::get('emailactivation','App\Http\Controllers\SignController@emailactivation');
 //    Route::get('lol',function (){return view('nonsite.emailactivation');}); //testing
@@ -56,6 +57,9 @@ Route::group(['prefix'=>'public'],function () {
 // protected page route
 // pages that must need a signed account to view
 // Middleware will be implemented
-Route::group(['prefix'=>'protected'],function (){
+Route::group(['prefix'=>'protected','middleware'=>'checksigned'],function (){
+    Route::get('myaccount','App\Http\Controllers\InfoController@myaccount');
 
+    //processing signout
+    Route::get('signout','App\Http\Controllers\SignController@signout');
 });

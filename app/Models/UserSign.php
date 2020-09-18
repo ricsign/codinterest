@@ -16,4 +16,8 @@ class UserSign extends Model
     public $incrementing = true;
 
     protected $fillable = ['username','password','email','usertoken','is_activated','created_time'];
+
+    public function user_info(){
+        return $this->hasOne(UserInfo::class,'uid','uid');
+    }
 }

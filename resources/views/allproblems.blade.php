@@ -12,7 +12,7 @@
                 <h5 class="card-title">Plain</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Territory 1</h6>
                 <p class="card-text">Fundamentals. This is where dream starts. This territory encompasses basic conditionals & loops and other fundamental computer science ideas.</p>
-                <a href="#" class="btn btn-primary">Explore Plain</a>
+                <a href="{{url('/public/getproblems/1')}}" class="btn btn-primary">Explore Plain</a>
             </div>
         </div>
         <div class="card">
@@ -21,7 +21,7 @@
                 <h5 class="card-title">River</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Territory 2</h6>
                 <p class="card-text">Hash Table, Sorting & Searching. This territory includes some important techniques may be used in daily life & competitive programming. </p>
-                <a href="#" class="btn btn-primary">Explore River</a>
+                <a href="{{url('/public/getproblems/2')}}" class="btn btn-primary">Explore River</a>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
                 <h5 class="card-title">Mountain</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Territory 3</h6>
                 <p class="card-text">Tree & Graph. This territory is a mountain that every programmer must conquer, it's essential, techniques such as recursion, traversal and Objected-Oriented Programming may be used.</p>
-                <a href="#" class="btn btn-primary">Explore Mountain</a>
+                <a href="{{url('/public/getproblems/3')}}" class="btn btn-primary">Explore Mountain</a>
             </div>
         </div>
         <div class="card">
@@ -42,7 +42,7 @@
                 <h5 class="card-title">Desert</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Territory 4</h6>
                 <p class="card-text">Dynamic Programming & Memoization. This territory is full of danger. You might realize how inefficient naive recursion is, dynamic programming is a crucial technique to reduce the time complexity.</p>
-                <a href="#" class="btn btn-primary">Explore Desert</a>
+                <a href="{{url('/public/getproblems/4')}}" class="btn btn-primary">Explore Desert</a>
             </div>
         </div>
 
@@ -55,7 +55,7 @@
                 <h5 class="card-title">Plateau</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Territory 5</h6>
                 <p class="card-text">Greedy & Mathematics. The explorer with power of strong logical reasoning shall enter. When you finish this territory where mathematics and computer science intersects, you will realize how beautiful this subject is.</p>
-                <a href="#" class="btn btn-primary">Explore Plateau</a>
+                <a href="{{url('/public/getproblems/5')}}" class="btn btn-primary">Explore Plateau</a>
             </div>
         </div>
         <div class="card">
@@ -64,7 +64,7 @@
                 <h5 class="card-title">Ocean</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Territory 6</h6>
                 <p class="card-text">Extensive Topics. This is the territory where extensive topics are introduced. Some examples to that are: Euler's path, Euler's circuit, A* Search, advanced data structures and etc.</p>
-                <a href="#" class="btn btn-primary">Explore Ocean</a>
+                <a href="{{url('/public/getproblems/6')}}" class="btn btn-primary">Explore Ocean</a>
             </div>
         </div>
     </div>

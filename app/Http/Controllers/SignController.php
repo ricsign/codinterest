@@ -131,6 +131,11 @@ class SignController extends Controller
         // 4. Redirect to index
         return redirect('/public/index')->with('success_signin','Welcome back, '.$user->username.'!');
     }
+
+    public function signout(){
+        session()->flush();
+        return redirect('/public/signin');
+    }
 }
 
 
