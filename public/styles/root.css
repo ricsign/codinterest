@@ -1,6 +1,9 @@
 body{
     background-color: #f6f6f6;
 }
+p{
+    font-size: 17px;
+}
 .main {
     width: 85%;
     text-align: center;
