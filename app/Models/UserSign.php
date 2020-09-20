@@ -1,5 +1,6 @@
 <?php
 
+//Model for user_sign Table
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +16,7 @@ class UserSign extends Model
     protected $keyType = 'int';
     public $incrementing = true;
 
-    protected $fillable = ['username','password','email','usertoken','is_activated','created_time'];
+    protected $fillable = ['username','password','email','usertoken','is_activated'];
 
     public function user_info(){
         return $this->hasOne(UserInfo::class,'uid','uid');

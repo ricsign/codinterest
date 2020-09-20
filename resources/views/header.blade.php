@@ -18,7 +18,7 @@
                 <a class="nav-link" href="#">Ranking</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Discuss</a>
+                <a class="nav-link" href="#">Redeem</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Resources</a>

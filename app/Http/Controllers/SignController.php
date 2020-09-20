@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserInfo;
 use App\Models\UserSign;
 use Dotenv\Validator;
 use http\Client\Curl\User;
@@ -88,6 +89,14 @@ class SignController extends Controller
         ]);
         if(!$user) return redirect('/public/signup')->withErrors('Unknown errors had occured');
 
+        $userinfo = UserInfo::create([
+            'uid' => $user->uid,
+            'usercoins'=> 0,
+            'userac' => 0,
+            'usersubmission' => 0
+        ]);
+        if(!$userinfo) return redirect('/public/signup')->withErrors('Unknown errors had occured');
+
         // 3. send activation link
         Mail::send('nonsite.emailactivation',['user'=>$user],function($m) use ($user){
             $m->from('codinterest@noreply.com','Account Validation');
@@ -96,7 +105,7 @@ class SignController extends Controller
         // 4. redirect to signin page
 //        echo $user->uid;
 //        echo "<script>alert('You have successfully signed up, please check your email to activate your account, then sign back in again.');</script>";
-        return redirect('/public/signin')->with('msg','You have successfully signed up, please check your email to activate your account, then sign back in again. (The activation email might be in spams)');
+        return redirect('/public/signin')->with('msg','You have successfully signed up, please check your email to activate your account, then sign back in again. (The activation email might be in the spams folder, the link may take up to 5 minutes to deliver.)');
     }
 
     public function dosignin(Request $request){

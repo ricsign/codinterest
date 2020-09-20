@@ -1,4 +1,6 @@
-
+#ac-img{
+    margin: 0 auto 30px auto;
+}
 #description-container{
     text-align: left;
 }
@@ -18,19 +20,24 @@
 #sub-tip-text li{
     font-weight: bold;
 }
+#verdict,#verdict-description{
+    text-align: left;
+}
 
 
 .answer{
     min-height: 80px;
     max-height: 3000px;
+    width: 80% !important;
 }
 .input-group{
-    margin-top: 10%;
+    text-align: left;
+    margin-top: 8%;
 }
 .input-tip{
     margin-top: 1%;
     color: red;
-    font-size: 15px;
+    font-size: 13px;
 }
 .submit{
     margin-top: 2%;
@@ -38,5 +45,6 @@
 .sub-tip{
     margin-left: 20px;
 }
+
 
 

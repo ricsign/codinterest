@@ -10,6 +10,7 @@
             <th scope="col">Problem ID</th>
             <th scope="col">Title</th>
             <th scope="col">Reward</th>
+            <th scope="col">Total Submission</th>
             <th scope="col">Total Acceptance</th>
             <th scope="col">AC</th>
         </tr>
@@ -20,8 +21,13 @@
                 <th scope="row">{{$problem->pid}}</th>
                 <td><a href="{{url('/public/getsingleproblem/'.$problem->pid)}}">{{$problem->ptit}}</a></td>
                 <td>{{$problem->preward}}</td>
+                <td>{{$problem->psub}}</td>
                 <td>{{$problem->pacc}}</td>
-                <td></td>
+                @if (in_array($problem->pid,$solved))
+                    <td><img src="{{asset('/imgs/site/correct.png')}}" alt="AC"></td>
+                @else
+                    <td></td>
+                @endif
             </tr>
         @endforeach
         </tbody>

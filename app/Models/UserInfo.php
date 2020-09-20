@@ -1,5 +1,7 @@
 <?php
 
+//Model for user_info Table
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,4 +16,10 @@ class UserInfo extends Model
     protected $keyType = 'int';
     public $incrementing = true;
     public $timestamps = false;
+
+    protected $guarded = [];
+
+    public function submission(){
+        return $this->hasMany(Submission::class,'uid','uid');
+    }
 }

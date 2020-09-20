@@ -62,4 +62,10 @@ Route::group(['prefix'=>'protected','middleware'=>'checksigned'],function (){
 
     //processing signout
     Route::get('signout','App\Http\Controllers\SignController@signout');
+
+    //processing submission
+    Route::post('submission','App\Http\Controllers\SubmissionController@submission');
+
+    //get solution page
+    Route::get('solution/{pid}','App\Http\Controllers\ProblemsController@solution')->where('pid','[0-9]+');
 });

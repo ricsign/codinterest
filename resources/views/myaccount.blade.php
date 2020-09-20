@@ -8,9 +8,9 @@
         <ul>
             <li>Your ID: {{$user->uid}}</li>
             <li>Your Username: {{$user->username}}</li>
-            <li>Your Coins: {{$user->user_info->usercoins}}</li>
-            <li>Your Total AC: {{$user->user_info->userac}}</li>
-            <li>Your Total Submission: {{$user->user_info->usersubmission}}</li>
+            <li>Your Coins: {{$user_info->usercoins}}</li>
+            <li>Your Total AC: {{$user_info->userac}}</li>
+            <li>Your Total Submission: {{$user_info->usersubmission}}</li>
         </ul>
         <button class="btn btn-danger btn-lg" onclick="conf()">Sign Out</button>
     </div>

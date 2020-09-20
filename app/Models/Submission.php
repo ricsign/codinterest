@@ -1,19 +1,19 @@
 <?php
 
-//Model for problems Table
+//Model for submission Table
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Problems extends Model
+class Submission extends Model
 {
     use HasFactory;
-
-    protected $table = 'problems';
-    protected $primaryKey = 'pid';
+    protected $table = 'submission';
+    protected $primaryKey = 'sid';
     protected $keyType = 'int';
     public $incrementing = true;
-    public $timestamps = false;
+
+    protected $fillable = ['sid','uid','pid','status'];
 }
