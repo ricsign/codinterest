@@ -30,7 +30,7 @@
                 @if(empty(session()->get('user')))
                     <a class="nav-link" href="{{url('/public/signup')}}">Sign Up</a>
                 @else
-                    <a class="nav-link" href="{{url('/protected/myaccount')}}">My Account</a>
+                    <a class="nav-link" href="{{url('/public/myaccount/'.session()->get('user')->uid)}}">My Account</a>
                 @endif
             </li>
         </ul>

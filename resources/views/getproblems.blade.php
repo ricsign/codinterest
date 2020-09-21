@@ -11,7 +11,7 @@
             <th scope="col">Title</th>
             <th scope="col">Reward</th>
             <th scope="col">Total Submission</th>
-            <th scope="col">Total Acceptance</th>
+            <th scope="col">Acceptance Rate</th>
             <th scope="col">AC</th>
         </tr>
         </thead>
@@ -22,7 +22,11 @@
                 <td><a href="{{url('/public/getsingleproblem/'.$problem->pid)}}">{{$problem->ptit}}</a></td>
                 <td>{{$problem->preward}}</td>
                 <td>{{$problem->psub}}</td>
-                <td>{{$problem->pacc}}</td>
+                @if($problem->psub == 0)
+                    <td>N/A</td>
+                @else
+                    <td>{{floor($problem->pacc/$problem->psub*100)}}%</td>
+                @endif
                 @if (in_array($problem->pid,$solved))
                     <td><img src="{{asset('/imgs/site/correct.png')}}" alt="AC"></td>
                 @else

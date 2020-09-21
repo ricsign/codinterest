@@ -52,13 +52,16 @@ Route::group(['prefix'=>'public'],function () {
     Route::get('getsingleproblem/{pid}','App\Http\Controllers\ProblemsController@getsingleproblem')
         ->where('pid','[0-9]+');
 
+    // route of myaccount
+    Route::get('myaccount/{uid}','App\Http\Controllers\InfoController@myaccount')
+        ->where('uid','[0-9]+');
+
 });
 
 // protected page route
 // pages that must need a signed account to view
 // Middleware will be implemented
 Route::group(['prefix'=>'protected','middleware'=>'checksigned'],function (){
-    Route::get('myaccount','App\Http\Controllers\InfoController@myaccount');
 
     //processing signout
     Route::get('signout','App\Http\Controllers\SignController@signout');
@@ -68,4 +71,5 @@ Route::group(['prefix'=>'protected','middleware'=>'checksigned'],function (){
 
     //get solution page
     Route::get('solution/{pid}','App\Http\Controllers\ProblemsController@solution')->where('pid','[0-9]+');
+
 });

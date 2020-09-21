@@ -66,7 +66,7 @@ class SubmissionController extends Controller
             $user->update([
                 'usercoins' => $user->usercoins+$problem->preward
             ]);
-            return ['status'=>1,'msg'=>'Your answer is correct for all testcases, you received '.$problem->preward.' coins.'];
+            return ['status'=>1,'msg'=>'Your answer is correct for all testcases, you received '.$problem->preward.' coins. Refresh the page to check the solution.'];
         }
     }
 }
