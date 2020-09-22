@@ -31,7 +31,6 @@ Route::group(['prefix'=>'public'],function () {
     Route::post('dosignup','App\Http\Controllers\SignController@dosignup');
     Route::post('dosignin','App\Http\Controllers\SignController@dosignin');
 
-
     // email activation
     Route::get('emailactivation','App\Http\Controllers\SignController@emailactivation');
 //    Route::get('lol',function (){return view('nonsite.emailactivation');}); //testing
@@ -56,6 +55,8 @@ Route::group(['prefix'=>'public'],function () {
     Route::get('myaccount/{uid}','App\Http\Controllers\InfoController@myaccount')
         ->where('uid','[0-9]+');
 
+    // route of redeem page
+    Route::get('redeem','App\Http\Controllers\RedeemController@redeempage');
 });
 
 // protected page route
@@ -63,13 +64,17 @@ Route::group(['prefix'=>'public'],function () {
 // Middleware will be implemented
 Route::group(['prefix'=>'protected','middleware'=>'checksigned'],function (){
 
-    //processing signout
+    // processing signout
     Route::get('signout','App\Http\Controllers\SignController@signout');
 
-    //processing submission
+    // processing submission
     Route::post('submission','App\Http\Controllers\SubmissionController@submission');
 
-    //get solution page
+    // get solution page
     Route::get('solution/{pid}','App\Http\Controllers\ProblemsController@solution')->where('pid','[0-9]+');
 
+    // redeem item page
+    // item 1: key, 2: 10 keys, 3: silver coder, 4: gold coder + 5 keys, 5: red coder + 50 keys
+    Route::get('redeemitem/{item}','App\Http\Controllers\RedeemController@redeemitem')
+        ->where('item','[12345]');
 });
